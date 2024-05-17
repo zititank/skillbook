@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"> 
+    <style href="style.css"></style>
+    <title>Skillbook</title>
+</head>
+<body>
+    <header>
+        <h1>Skillbook</h1>
+        <div>
+            <img src="OIP.jpg" href="" alt="Profile" class="profile-icon">
+            <button class="theme-button" onclick="toggleTheme()">-text mode</button>
+        </div>
+    </header>
+    <div class="main-content">
+        <div class="post" id="originalDiv">
+            <h1>Banana threat</h1>
+            <img src="treatb.jpg" alt="Post 1">
+            <p>Recently scientists from South America have discovered a new banana threat...</p>
+            <div class="post-footer">
+                <button class="like-button">Like</button>
+                <span class="likes">0 Likes</span>
+                <button class="comment-button">Comment</button>
+                <div>
+                    <input type="text" class="comment-input" placeholder="Write a comment...">
+                    <button class="comment-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="post" id="originalDiv2">
+            <h1>Are horrors actually scary?</h1>
+            <img src="horror.jpg" alt="Post 2">
+            <p>We have been thinking about the idea - why horrors are scary and...</p>
+            <div class="post-footer">
+                <button class="like-button">Like</button>
+                <span class="likes">0 Likes</span>
+                <button class="comment-button">Comment</button>
+                <div>
+                    <input type="text" class="comment-input" placeholder="Write a comment...">
+                    <button class="comment-submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edge-panel" onclick="togglePostForm()">
+        <h2>Create a Post</h2>
+    </div>
+    <footer>
+        <p>&copy; 4444 Skillbook. All rights are not reserved.</p>
+    </footer>
+    <script>
+        function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+}
+const likeButtons = document.querySelectorAll('.like-button');
+likeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const likes = button.parentElement.querySelector('.likes');
+        const likeCount = parseInt(likes.textContent);
+        likes.textContent = (likeCount + 1) + ' Likes';
+    });
+});
+const commentButtons = document.querySelectorAll('.comment-submit');
+commentButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const commentInput = button.parentElement.querySelector('.comment-input');
+        const commentText = commentInput.value.trim();
+        if (commentText !== '') {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'comment';
+            commentDiv.textContent = commentText;
+            button.parentElement.parentElement.parentElement.appendChild(commentDiv);
+            commentInput.value = '';
+        }
+    });
+});
+            document.body.classList.toggle('dark-theme');
+        const originalDiv1 = document.getElementById('originalDiv');
+        const originalDiv2 = document.getElementById('originalDiv2');
+        const postsBox = document.querySelector('.main-content');
+        for (let i = 0; i < 100; i++) {
+            const clonedDiv1 = originalDiv1.cloneNode(true);
+            postsBox.appendChild(clonedDiv1);
+            const clonedDiv2 = originalDiv2.cloneNode(true);
+            postsBox.appendChild(clonedDiv2);
+        }
+        const postTemplate = document.querySelector('.post');
+        const imgUrls = [
+            "https://ir.ozone.ru/s3/multimedia-o/c1000/6562172424.jpg",
+            "https://llfalmaty.kz/upload/team_logo/68232_133886_23.jpg"
+        ];
+        for (let i = 0; i < 100; i++) {
+            const newPost = postTemplate.cloneNode(true);
+            const imgPost = newPost.querySelector('img');
+            imgPost.setAttribute('src', imgUrls[i % 2]);
+            postsBox.appendChild(newPost);
+        }
+    </script> 
+</body>
+</html>
